@@ -33,6 +33,8 @@
     "@subql/common-cosmos": "workspace:*",
     "@subql/node-core": "^16.1.0",
     "@subql/types-cosmos": "workspace:*",
+    "hyper-express": "^6.15.1",
+    "live-directory": "^3.0.3",
     "lodash": "^4.17.21",
     "protobufjs": "^6.11.4",
     "reflect-metadata": "^0.1.13",

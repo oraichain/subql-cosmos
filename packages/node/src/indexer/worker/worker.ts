@@ -15,7 +15,6 @@ initLogger(
   argv.outputFmt as 'json' | 'colored',
   argv.logLevel as string | undefined,
 );
-
 import { threadId } from 'node:worker_threads';
 import { NestFactory } from '@nestjs/core';
 import {
@@ -28,14 +27,19 @@ import {
 import { ProjectService } from '../project.service';
 import { WorkerModule } from './worker.module';
 import { WorkerService } from './worker.service';
+import { HyperExpressAdapter } from '../../adapters';
 
 const logger = getLogger(`worker #${threadId}`);
 
 async function initWorker(startHeight?: number): Promise<void> {
   try {
-    const app = await NestFactory.create(WorkerModule, {
-      logger: new NestLogger(!!argv.debug), // TIP: If the worker is crashing comment out this line for better logging
-    });
+    const app = await NestFactory.create(
+      WorkerModule,
+      new HyperExpressAdapter(),
+      {
+        logger: new NestLogger(!!argv.debug), // TIP: If the worker is crashing comment out this line for better logging
+      },
+    );
 
     await app.init();
 

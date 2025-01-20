@@ -13,6 +13,7 @@ import { AppModule } from './app.module';
 import { FetchService } from './indexer/fetch.service';
 import { ProjectService } from './indexer/project.service';
 import { yargsOptions } from './yargs';
+import { HyperExpressAdapter } from './adapters';
 const pjson = require('../package.json');
 
 const { argv } = yargsOptions;
@@ -33,7 +34,7 @@ export async function bootstrap(): Promise<void> {
   }
 
   try {
-    const app = await NestFactory.create(AppModule, {
+    const app = await NestFactory.create(AppModule, new HyperExpressAdapter(), {
       logger: new NestLogger(!!argv.debug),
     });
     await app.init();
