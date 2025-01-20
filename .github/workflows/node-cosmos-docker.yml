@@ -112,7 +112,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: subquerynetwork
+          username: oraichain
           password: ${{ secrets.SQ_DOCKERHUB_TOKEN }}
 
       ## node
@@ -133,7 +133,7 @@ jobs:
           push: true
           platforms: arm64,amd64
           file: ./packages/node/Dockerfile
-          tags: subquerynetwork/subql-node-cosmos:v${{ steps.get-node-version.outputs.NODE_VERSION }},
+          tags: oraichain/subql-node-cosmos:v${{ steps.get-node-version.outputs.NODE_VERSION }},
           build-args: RELEASE_VERSION=${{ steps.get-node-version.outputs.NODE_VERSION }}
 
       - name: Build and push
@@ -144,7 +144,7 @@ jobs:
           push: true
           platforms: arm64,amd64
           file: ./packages/node/Dockerfile
-          tags: subquerynetwork/subql-node-cosmos:v${{ steps.get-node-version.outputs.NODE_VERSION }},subquerynetwork/subql-node-cosmos:latest
+          tags: oraichain/subql-node-cosmos:v${{ steps.get-node-version.outputs.NODE_VERSION }},oraichain/subql-node-cosmos:latest
           build-args: RELEASE_VERSION=${{ steps.get-node-version.outputs.NODE_VERSION }}
 
       - name: Image digest
